@@ -1,7 +1,7 @@
 
-
-
 fun main(){
+
+    val photos = Photo("photo",1,1,1,1)
 
     val comments = Comments(1,false,false,false,true)
     val copyright = Copyright(1,"...","...","...")
@@ -9,6 +9,7 @@ fun main(){
     val reposts = Reposts(1,false)
     val views = Views(1)
     val donut = Donut(false,1,1,false,"all")
+    val geo:Geo = Geo("...","...","...")
     val post = Post(
         1,
         1,
@@ -25,25 +26,38 @@ fun main(){
         reposts,
         views,
         "post",
+        null,
+        geo,
+        null,
         1,
-        false,
-        false,
-        false,
+        true,
+        true,
+        true,
         true,
         true,
         donut,
         1
     )
 
-
-
-
-
+   addAtt(photos)
   add(post)
     edit(post)
 }
 var WallService = emptyArray<Post>()
 var postID:Array<Int> = emptyArray()
+var Att = emptyArray<Attachment>()
+
+fun addAtt(type: Attachment ):Attachment {
+    when(type){
+        is Photo -> { val photo = type; Att += photo}
+        is Graffiti -> {val graffiti = type; Att += graffiti}
+        is App -> {val app = type; Att += app}
+        is Page -> {val page = type; Att += page}
+        is Album -> {val album = type; Att += album}
+    }
+
+TODO()
+}
 
 fun add(post:Post):Post {
     WallService += post
