@@ -1,5 +1,4 @@
-class Album(
-    override val type: Any,
+data class Album(
     val id:Int,
     var thumb:Any,
     val ownerId:Int,
@@ -9,4 +8,5 @@ class Album(
     val updated:Int,
     val size:Int
 ) :Attachment {
+    override val type: String = "Album"
 }

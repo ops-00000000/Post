@@ -1,7 +1,7 @@
-class Page(
-    override val type: Any,
+data class Page(
     val id:Int,
     val groupId:Int,
     var title:String
 ) : Attachment {
+    override val type: String ="Page"
 }
