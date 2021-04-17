@@ -66,7 +66,7 @@ fun addAtt(type: Attachment): Attachment {
         }
     }
 
-    TODO()
+    return type
 }
 
 fun add(post: Post): Post {
