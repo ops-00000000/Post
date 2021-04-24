@@ -43,8 +43,7 @@ fun main() {
     edit(post)
 }
 
-var WallService = emptyArray<Post>()
-var postID: Array<Int> = emptyArray()
+var service = WallService()
 var Att = emptyArray<Attachment>()
 
 fun addAtt(type: Attachment): Attachment {
@@ -70,15 +69,15 @@ fun addAtt(type: Attachment): Attachment {
 }
 
 fun add(post: Post): Post {
-    WallService += post
-    postID += post.id
+   service.posts += post
+    service.postID += post.id
     return post
 }
 
 
 fun edit(post: Post): Boolean {
 
-    if (post in WallService) {
+    if (post in service.posts) {
         post.canEdit = post.canEdit
         post.canPin = post.canPin
         post.commets = post.commets
@@ -100,7 +99,7 @@ fun edit(post: Post): Boolean {
         post.singerId = post.singerId
         post.text = post.text
         post.views = post.views
-        WallService += post
+        service.posts += post
         return true
     } else {
         return false

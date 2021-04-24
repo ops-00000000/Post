@@ -1,8 +1,69 @@
 import org.junit.jupiter.api.Test
-
 import org.junit.jupiter.api.Assertions.*
 
 internal class MainKtTest {
+    @Test
+    fun shouldThrow() {
+        val service = WallService()
+        val expected = PostNotFoundException()
+        val donut = Donut(false, 1, 1, false, "all")
+        val commentPost= CommentsPost(11,2,1,"///",donut,1,1)
+       val actual = service.createComment(commentPost)
+        assertEquals(expected,actual)
+    }
+
+    @Test
+    fun DoesNotThrow() {
+        val service = WallService()
+        val donut = Donut(false, 1, 1, false, "all")
+        val commentPost= CommentsPost(1,2,1,"///",donut,1,1)
+        val comments = Comments(1, false, false, false, true)
+        val copyright = Copyright(1, "...", "...", "...")
+        val likes = Likes(1, false, true, true)
+        val reposts = Reposts(1, false)
+        val views = Views(1)
+        val geo: Geo = Geo("...", "...", "...")
+        val post = Post(
+            1,
+            1,
+            1,
+            1,
+            1,
+            "1",
+            1,
+            1,
+            false,
+            comments,
+            copyright,
+            likes,
+            reposts,
+            views,
+            "post",
+            null,
+            geo,
+            null,
+            1,
+            true,
+            true,
+            true,
+            true,
+            true,
+            donut,
+            1
+        )
+        add(post)
+
+        val actual = service.createComment(commentPost)
+        assertTrue(actual)
+    }
+
+
+
+
+
+
+
+
 
     @Test
     fun addTest() {
@@ -45,7 +106,7 @@ internal class MainKtTest {
 
 
         add(post)
-        for (post in WallService) {
+        for (post in service.posts) {
             val actual = post.id
             assertFalse(actual < 0)
         }
@@ -55,6 +116,7 @@ internal class MainKtTest {
 
 
 }
+var service = WallService()
 
 class WallServiceTest {
     @Test
@@ -296,5 +358,6 @@ class WallServiceTest {
 
         assertFalse(result)
     }
+
 
 }
