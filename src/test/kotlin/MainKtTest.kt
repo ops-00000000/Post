@@ -3,18 +3,17 @@ import org.junit.jupiter.api.Assertions.*
 
 internal class MainKtTest {
     @Test
-    fun shouldThrow() {
-        val service = WallService()
-        val expected = PostNotFoundException()
-        val donut = Donut(false, 1, 1, false, "all")
-        val commentPost= CommentsPost(11,2,1,"///",donut,1,1)
-       val actual = service.createComment(commentPost)
-        assertEquals(expected,actual)
+    fun shouldThrow()  {
+            val exepted = PostNotFoundException("Post Not Found")
+            val donut = Donut(false, 1, 1, false, "all")
+            val commentPost = CommentsPost(1, 2, 1, "///", donut, 1, 1)
+            val actual = service.createComment(commentPost)
+            assertEquals(exepted,actual)
+
     }
 
     @Test
     fun DoesNotThrow() {
-        val service = WallService()
         val donut = Donut(false, 1, 1, false, "all")
         val commentPost= CommentsPost(1,2,1,"///",donut,1,1)
         val comments = Comments(1, false, false, false, true)
@@ -51,10 +50,11 @@ internal class MainKtTest {
             donut,
             1
         )
-        add(post)
 
-        val actual = service.createComment(commentPost)
-        assertTrue(actual)
+        add(post)
+        service.createComment(commentPost)
+        assertTrue(service.createComment(commentPost))
+
     }
 
 
@@ -64,6 +64,9 @@ internal class MainKtTest {
 
 
 
+
+
+class WallServiceTest {
 
     @Test
     fun addTest() {
@@ -116,9 +119,11 @@ internal class MainKtTest {
 
 
 }
-var service = WallService()
+    var service = WallService()
 
-class WallServiceTest {
+
+
+
     @Test
     fun updateExisting() {
         val comments = Comments(1, false, false, false, true)
@@ -359,5 +364,4 @@ class WallServiceTest {
         assertFalse(result)
     }
 
-
-}
+ }

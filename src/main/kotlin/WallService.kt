@@ -8,7 +8,7 @@ class WallService {
             comments += comment
             return true
         } else {
-            throw PostNotFoundException()
+            throw PostNotFoundException("Post Not Found")
         }
     }
 }

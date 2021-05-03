@@ -1,13 +1,12 @@
 fun main() {
-
+    val donut = Donut(false, 1, 1, false, "all")
     val photos = Photo(1, 1, 1, 1)
-
+    val commentPost= CommentsPost(1,2,1,"///",donut,1,1)
     val comments = Comments(1, false, false, false, true)
     val copyright = Copyright(1, "...", "...", "...")
     val likes = Likes(1, false, true, true)
     val reposts = Reposts(1, false)
     val views = Views(1)
-    val donut = Donut(false, 1, 1, false, "all")
     val geo: Geo = Geo("...", "...", "...")
     val post = Post(
         1,
@@ -40,6 +39,7 @@ fun main() {
 
     addAtt(photos)
     add(post)
+    println(service.createComment(commentPost))
     edit(post)
 }
 
@@ -69,9 +69,11 @@ fun addAtt(type: Attachment): Attachment {
 }
 
 fun add(post: Post): Post {
+    val idPost = if (service.posts.isNotEmpty()) service.posts.last().id + 1 else 1
    service.posts += post
+    post.id = idPost
     service.postID += post.id
-    return post
+    return  service.posts.last()
 }
 
 
