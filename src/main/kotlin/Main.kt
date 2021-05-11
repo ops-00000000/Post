@@ -37,73 +37,13 @@ fun main() {
         1
     )
 
-    addAtt(photos)
-    add(post)
+    service.addAtt(photos)
+    service.add(post)
     println(service.createComment(commentPost))
-    edit(post)
+    service.edit(post)
 }
 
 var service = WallService()
-var Att = emptyArray<Attachment>()
-
-fun addAtt(type: Attachment): Attachment {
-    when (type.type) {
-        "Photo" -> {
-            val photo = type; Att += photo
-        }
-        "Graffiti" -> {
-            val graffiti = type; Att += graffiti
-        }
-        "App" -> {
-            val app = type; Att += app
-        }
-       "Page" -> {
-            val page = type; Att += page
-        }
-       "Album" -> {
-            val album = type; Att += album
-        }
-    }
-
-    return type
-}
-
-fun add(post: Post): Post {
-    val idPost = if (service.posts.isNotEmpty()) service.posts.last().id + 1 else 1
-   service.posts += post
-    post.id = idPost
-    service.postID += post.id
-    return  service.posts.last()
-}
 
 
-fun edit(post: Post): Boolean {
 
-    if (post in service.posts) {
-        post.canEdit = post.canEdit
-        post.canPin = post.canPin
-        post.commets = post.commets
-        post.copyright = post.copyright
-        post.createdBy = post.createdBy
-        post.donut = post.donut
-        post.friendsOnly = post.friendsOnly
-        post.fromId = post.fromId
-        post.isFavorite = post.isFavorite
-        post.isPinned = post.isPinned
-        post.likes = post.likes
-        post.markedAsAds = post.markedAsAds
-        post.ownerId = post.ownerId
-        post.postType = post.postType
-        post.postponedId = post.postponedId
-        post.replyOwnerId = post.replyOwnerId
-        post.replyPostId = post.replyPostId
-        post.reposts = post.reposts
-        post.singerId = post.singerId
-        post.text = post.text
-        post.views = post.views
-        service.posts += post
-        return true
-    } else {
-        return false
-    }
-}

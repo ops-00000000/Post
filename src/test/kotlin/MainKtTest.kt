@@ -6,11 +6,12 @@ class WallServiceTest {
 
     @Test
     fun shouldThrow()  {
-        val exepted = PostNotFoundException("Post Not Found")
+
         val donut = Donut(false, 1, 1, false, "all")
         val commentPost = CommentsPost(1, 2, 1, "///", donut, 1, 1)
-        val actual = service.createComment(commentPost)
-        assertEquals(exepted,actual)
+        assertThrows(PostNotFoundException::class.java) {
+             service.createComment(commentPost)
+        }
 
     }
 
@@ -53,7 +54,7 @@ class WallServiceTest {
             1
         )
 
-        add(post)
+        service.add(post)
         service.createComment(commentPost)
         assertTrue(service.createComment(commentPost))
 
@@ -101,7 +102,7 @@ class WallServiceTest {
         )
 
 
-        add(post)
+        service.add(post)
         for (post in service.posts) {
             val actual = post.id
             assertFalse(actual < 0)
@@ -214,10 +215,10 @@ class WallServiceTest {
         )
 
 
-        add(post)
-        add(post1)
-        add(post2)
-        val result = edit(post1)
+        service.add(post)
+        service.add(post1)
+        service.add(post2)
+        val result = service.edit(post1)
 
 
         assertTrue(result)
@@ -348,10 +349,10 @@ class WallServiceTest {
             1
         )
 
-        add(post)
-        add(post1)
-        add(post2)
-        val result = edit(post3)
+        service.add(post)
+        service.add(post1)
+        service.add(post2)
+        val result = service.edit(post3)
 
 
         assertFalse(result)
