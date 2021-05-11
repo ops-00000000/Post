@@ -6,7 +6,7 @@ class WallServiceTest {
 
     @Test
     fun shouldThrow() {
-
+        val service = WallService()
         val donut = Donut(false, 1, 1, false, "all")
         val commentPost = CommentsPost(1, 2, 1, "///", donut, 1, 1)
         assertThrows(PostNotFoundException::class.java) {
